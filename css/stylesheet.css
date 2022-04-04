@@ -1,4 +1,4 @@
-@import url(/css/fonst.css);
+@import url(/css/fonts.css);
 
 **,
 **::before,
@@ -41,7 +41,7 @@ body {
 	margin-bottom: 25px;
 }
 
-.input__add {
+.todo__input {
 	padding: 10px 15px;
 	width: 330px;
 	font-size: 20px;
@@ -49,19 +49,19 @@ body {
 	border-radius: 2px;
 	background: #fff;
 }
-.input__add:focus-visible {
-	outline: 2px solid #9e9e9e; 
+.todo__input:focus-visible {
+	outline: 2px solid #9e9e9e;
 }
 
-.input__add::placeholder {
+.todo__input::placeholder {
 	color: #707070;
 }
 
-.input__add:focus::-webkit-input-placeholder {
+.todo__input:focus::-webkit-input-placeholder {
 	color: transparent;
 }
 
-.btn__add {
+.todo__btn {
 	position: relative;
 	padding: 10px 15px;
 	text-align: center;
@@ -73,12 +73,12 @@ body {
 	opacity: 0.8;
 	cursor: pointer;
 }
-.btn__add:hover {
+.todo__btn:hover {
 	opacity: 1;
 	transition: all 0.3s ease-out;
 }
 
-.btn__add:active {
+.todo__btn:active {
 	opacity: 0.7;
 	transition: none;
 }
@@ -200,67 +200,8 @@ body {
 [data-todo-option='deleted'] .todo__item:not([data-todo-state='deleted']) {
 	display: none;
 }
-/*
 
-body h1 {
-  text-align: center;
+.complete {
+	text-decoration: line-through;
+	opacity: 0.7;
 }
-
-.todo {
-  padding: 5px;
-}
-
-.todo__add {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-pack: justify;
-      -ms-flex-pack: justify;
-          justify-content: space-between;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
-}
-
-.todo__add .todo__input {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -ms-flex-line-pack: center;
-      align-content: center;
-}
-
-.todo__add .todo__input .input__add {
-  width: 400px;
-  padding: 0 15px;
-  height: 45px;
-  border-radius: 4px;
-}
-
-.todo__active {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-orient: vertical;
-  -webkit-box-direction: normal;
-      -ms-flex-direction: column;
-          flex-direction: column;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
-  padding: 40px;
-}
-
-.todo__active .todo__list {
-  list-style: none;
-  width: 500px;
-  padding: 0;
-}
-
-.todo__active .todo__list .todo__item {
-  background: #fff;
-  padding: 15px;
-  margin: 5px;
-  border-radius: 4px;
-}
- */
