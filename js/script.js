@@ -20,7 +20,6 @@ const add = () => {
 	);
 	save();
 	inputAdd.value = '';
-	return;
 };
 
 const save = () => {
@@ -32,11 +31,8 @@ const use = (e) => {
 	if (e.keyCode == 13 || target.classList.contains('todo__btn')) {
 		if (inputAdd.disabled || !inputAdd.value.length) {
 			return;
-		} else {
-			add();
 		}
-	} else if (e) {
-		return;
+		add();
 	}
 };
 
@@ -51,8 +47,6 @@ const reload = () => {
 const init = () => {
 	if (localStorage.length > 0) {
 		reload();
-	} else {
-		return;
 	}
 };
 
