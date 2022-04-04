@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" class="page">
+<html lang="en">
 	<head>
 		<meta charset="UTF-8" />
 		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
@@ -7,33 +7,44 @@
 		<link rel="stylesheet" href="css/stylesheet.css" />
 		<title>Project To Do List</title>
 	</head>
-	<body class="page__body">
-		<div class="box">
+	<!-- присваивать class тегу html или body - плохая практика
+	     классы используются для семантики (чтоб другому программисту было легко разобраться что происходит в коде)
+	     или для стилизации (если нужно описать элемент в css) -->
+	<body> 
+		<main>
 			<div class="container">
 				<div class="todo">
 					<h1 class="todo__title">To Do List</h1>
-					<div class="todo__add">
-							<input
+					<!-- todo__add - непонятное именование - ведь ты оборачиваешь в add весь контент с инпутом и списком.
+					     такие абстракции можно именовать wrap, content, inner ... -->
+					<div class="todo__wrap"> 
+							<input 
 								class="todo__input" 
 								placeholder="Add new task...."
 								type="text"
 							/>
 							<button class="todo__btn">Добавить</button>
 						</div>
-						<div class="todo__active">
+						<!-- todo__active - тоже непонятно почему active,
+						     этому блоку можно класс вообще не присваивать, не обязательно везде ставить классы
+						     ведь он даже в стилях не используется.
+						     проверь, можно ли вообще отказаться от этого div -->
+						<div>
 							<ul class="todo__list">
-								<li class="todo__item" data-todo-state="active" data-todo-key="Текст задачи">
+								<!-- непонятно зачем вообще этот пункт нужен,
+ 								     если его удалить и обновить страницу будет маячить всегда --
+								<!-- <li class="todo__item" data-todo-state="active" data-todo-key="Текст задачи">
 									<span class="todo__task">Текст задачи</span>
 									<span class="todo__action todo__action_restore" data-todo-action="active"></span>
 									<span class="todo__action todo__action_delete" data-todo-action="deleted"></span>
 									<span class="todo__action todo__action_complete" data-todo-action="completed"></span>
-								</li>
+								</li> -->
 							</ul>
 						</div>
 					</div>
 				</div>
 			</div>
-		</div>
+		</main>
 		<script src="js/script.js"></script>
 	</body>
 </html>
