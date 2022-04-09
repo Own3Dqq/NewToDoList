@@ -7,7 +7,7 @@ const task = [];
 
 const createItem = (textItem) => {
 	return `
-		<li class="todo__item" data-todo-state="action" data-todo-key="task${task.length}">
+		<li class="todo__item" data-todo-state="action" data-todo-key="task">
 			<span class="todo__task">${textItem}</span>
 			<span class="todo__action todo__action_restore" data-todo-action="active"></span>
 			<span class="todo__action todo__action_delete" data-todo-action="deleted"></span>
@@ -23,11 +23,7 @@ const addTask = () => {
 };
 
 const save = () => {
-	task.push({
-		name: `task${task.length}`,
-		text: inputAdd.value,
-		checked: 'active',
-	});
+	localStorage.setItem('todo', document.querySelector('.todo__list').innerHTML);
 };
 
 const use = (e) => {
@@ -43,7 +39,7 @@ const use = (e) => {
 
 const counter = () => {
 	let count = document.querySelector('.todo__general-count');
-	count.innerHTML = localStorage.length;
+	count.innerHTML = todoList.children.length;
 };
 
 const removeItem = (e) => {
@@ -53,11 +49,11 @@ const removeItem = (e) => {
 		target.dataset.todoAction == 'deleted'
 	) {
 		target.parentNode.remove();
-		let itemTargetTodo = target.parentNode.dataset.todoKey;
-		localStorage.removeItem(itemTargetTodo);
+		save();
 		counter();
 	} else if (target.dataset.todoAction == 'completed') {
 		target.parentNode.classList.toggle('complete');
+		save();
 	}
 	reload();
 };
@@ -76,11 +72,17 @@ const reload = () => {
 	}
 };
 
-const render = () => {};
+const render = () => {
+	const fromStorage = localStorage.getItem('todo');
+	if (fromStorage) {
+		document.querySelector('.todo__list').innerHTML = fromStorage;
+	}
+};
 
 const init = () => {
 	reload();
-	/* render(); */
+	render();
+	counter();
 };
 
 inputAdd.addEventListener('keydown', use);
