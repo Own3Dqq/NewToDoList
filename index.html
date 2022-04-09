@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" class="page">
+<html lang="en">
 	<head>
 		<meta charset="UTF-8" />
 		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
@@ -7,33 +7,31 @@
 		<link rel="stylesheet" href="css/stylesheet.css" />
 		<title>Project To Do List</title>
 	</head>
-	<body class="page__body">
-		<div class="box">
+	<body>
+		<main>
 			<div class="container">
 				<div class="todo">
 					<h1 class="todo__title">To Do List</h1>
-					<div class="todo__add">
-							<input
-								class="todo__input" 
-								placeholder="Add new task...."
-								type="text"
-							/>
-							<button class="todo__btn">Добавить</button>
+					<div class="todo__counter">
+						<div class="todo__general">
+							<span>Task in work: </span>
+							<span class="todo__general-count" data-general-counter>0</span>
 						</div>
-						<div class="todo__active">
-							<ul class="todo__list">
-								<li class="todo__item" data-todo-state="active" data-todo-key="Текст задачи">
-									<span class="todo__task">Текст задачи</span>
-									<span class="todo__action todo__action_restore" data-todo-action="active"></span>
-									<span class="todo__action todo__action_delete" data-todo-action="deleted"></span>
-									<span class="todo__action todo__action_complete" data-todo-action="completed"></span>
-								</li>
-							</ul>
+						<div class="todo__complete">
+							<span style="display: none">Complete: </span>
+							<span style="display: none" data-complete-counter>0</span>
 						</div>
 					</div>
+					<div class="todo__wrap">
+						<input class="todo__input" placeholder="New task...." type="text" />
+						<button class="todo__btn">Add task</button>
+					</div>
+					<ul class="todo__list">
+						<span class="message">You have 0 task, add a new</span>
+					</ul>
 				</div>
 			</div>
-		</div>
+		</main>
 		<script src="js/script.js"></script>
 	</body>
 </html>
