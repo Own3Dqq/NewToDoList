@@ -25,11 +25,20 @@ const deleteTask = (id) => {
 };
 
 const completeTask = (id) => {
-	console.log(
-		(tasks = tasks.map((task) =>
-			task.id === id ? (task.completed = true) : task
-		))
-	);
+	/* console.log(typeof id);
+	console.log(typeof tasks[0].id); */
+
+	tasks.map((task) => {
+		if (task.id === id) {
+			if (task.completed) {
+				return (task.completed = false);
+			} else {
+				return (task.completed = true);
+			}
+		}
+
+		return task;
+	});
 
 	renderAndSave(tasks);
 };
@@ -83,8 +92,7 @@ const action = (e) => {
 		if (target.dataset.todoAction == 'deleted') {
 			deleteTask(setTargetID);
 		} else if (target.dataset.todoAction == 'completed') {
-			console.log(setTargetID);
-			completeTask(setTargetID);
+			completeTask(Number(setTargetID));
 		}
 	}
 };
