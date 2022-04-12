@@ -25,12 +25,13 @@ const deleteTask = (id) => {
 };
 
 const completeTask = (id) => {
-	tasks = tasks.map((task) =>
-		task.id === id ? (task.completed = true) : task
+	console.log(
+		(tasks = tasks.map((task) =>
+			task.id === id ? (task.completed = true) : task
+		))
 	);
 
-	renderTasks(tasks);
-	saveToLocalStorage(tasks);
+	renderAndSave(tasks);
 };
 
 const renderTasks = (tasks) => {
@@ -47,7 +48,7 @@ const renderTasks = (tasks) => {
 		tasks.forEach((task) => {
 			tasksToHTML += `
 				<li class="todo__item ${
-					task.completed ? 'complete' : ''
+					task.completed ? 'completed' : ''
 				}" data-todo-state="action" data-todo-key="${task.id}">
 						<span class="todo__task">${task.text}</span>
 						<span class="todo__action todo__action_delete" data-todo-action="deleted"></span>
@@ -77,12 +78,14 @@ const action = (e) => {
 		}
 		addTask(todoInput.value);
 		todoInput.value = '';
-	} else if (
-		target.parentNode.tagName == 'LI' &&
-		target.dataset.todoAction == 'deleted'
-	) {
+	} else if (target.parentNode.tagName == 'LI') {
 		let setTargetID = target.parentNode.dataset.todoKey;
-		deleteTask(setTargetID);
+		if (target.dataset.todoAction == 'deleted') {
+			deleteTask(setTargetID);
+		} else if (target.dataset.todoAction == 'completed') {
+			console.log(setTargetID);
+			completeTask(setTargetID);
+		}
 	}
 };
 
