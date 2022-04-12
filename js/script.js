@@ -2,8 +2,7 @@
 const todoList = document.querySelector('.todo__list');
 const todoBtn = document.querySelector('.todo__btn');
 const todoInput = document.querySelector('.todo__input');
-
-const tasks = [];
+let tasks = [];
 
 const addTask = (text) => {
 	const task = {
@@ -14,17 +13,15 @@ const addTask = (text) => {
 
 	tasks.push(task);
 
-	renderTasks(tasks);
-	saveToLocalStorage(tasks);
-	updateCounter(tasks.length);
+	renderAndSave(tasks);
+
+	todoInput.innerHTML = '';
 };
 
 const deleteTask = (id) => {
 	tasks = tasks.filter((task) => task.id != id);
 
-	renderTasks(tasks);
-	saveToLocalStorage(tasks);
-	updateCounter(tasks.length);
+	renderAndSave(tasks);
 };
 
 const completeTask = (id) => {
@@ -38,32 +35,76 @@ const completeTask = (id) => {
 
 const renderTasks = (tasks) => {
 	if (!tasks.length) {
-		//show you have 0 task, add a new task
-		//clear ul
-		return;
-	}
+		todoList.innerHTML = '';
+		todoList.insertAdjacentHTML(
+			'afterbegin',
+			`<span class='message'>You have 0 task, add a new task</span>`
+		);
+	} else {
+		todoList.innerHTML = '';
+		let tasksToHTML = '';
 
-	let tasksToHTML;
-
-	tasks.forEach((task) => {
-		tasksToHTML += `
+		tasks.forEach((task) => {
+			tasksToHTML += `
 				<li class="todo__item ${
 					task.completed ? 'complete' : ''
 				}" data-todo-state="action" data-todo-key="${task.id}">
 						<span class="todo__task">${task.text}</span>
-						<span class="todo__action todo__action_restore" data-todo-action="active"></span>
 						<span class="todo__action todo__action_delete" data-todo-action="deleted"></span>
 						<span class="todo__action todo__action_complete" data-todo-action="completed"></span>
 				</li>`;
-	});
-	todoList.insertAdjacentHTML('afterbegin', tasksToHTML);
+		});
+		todoList.insertAdjacentHTML('afterbegin', tasksToHTML);
+	}
 };
 
-const saveToLocalStorage = (tasks) => {};
+const saveToLocalStorage = (tasks) => {
+	let setStorage = JSON.stringify(tasks);
+	localStorage.setItem('todo', setStorage);
+};
 
-const init = () => {};
+const updateCounter = (arg) => {
+	let count = document.querySelector('.todo__count');
+	count.innerHTML = arg;
+};
 
-document.addEventListener('click', addTask(todoInput.value));
+const action = (e) => {
+	const target = e.target;
+
+	if (e.keyCode == 13 || target.classList.contains('todo__btn')) {
+		if (todoInput.disabled || !todoInput.value.length) {
+			return;
+		}
+		addTask(todoInput.value);
+		todoInput.value = '';
+	} else if (
+		target.parentNode.tagName == 'LI' &&
+		target.dataset.todoAction == 'deleted'
+	) {
+		let setTargetID = target.parentNode.dataset.todoKey;
+		deleteTask(setTargetID);
+	}
+};
+
+const renderAndSave = (tasks) => {
+	renderTasks(tasks);
+	saveToLocalStorage(tasks);
+	updateCounter(tasks.length);
+};
+
+const init = () => {
+	let getStorage = JSON.parse(localStorage.getItem('todo'));
+
+	if (getStorage) {
+		tasks.push(...getStorage);
+	}
+
+	renderTasks(tasks);
+	updateCounter(tasks.length);
+};
+
+document.addEventListener('keydown', action);
+document.addEventListener('click', action);
 
 init();
 
@@ -117,6 +158,7 @@ const use = (e) => {
 			"<span class='message'>You have 0 task, add a new task</span>"
 		);
 	} else if (
+		
 		todoList.children.length > 1 &&
 		todoList.querySelector('.message')
 	) {
