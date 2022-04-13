@@ -4,14 +4,12 @@ const todoBtn = document.querySelector('.todo__btn');
 const todoInput = document.querySelector('.todo__input');
 let tasks = [];
 
-const addTask = (text) => {
-	let date = new Date();
-	
+const addTask = (text, date) => {
 	const task = {
 		text,
 		id: Date.now(),
 		completed: false,
-		date: date.toISOString().split('T')[0],
+		date,
 	};
 
 	tasks.push(task);
@@ -86,7 +84,7 @@ const action = (e) => {
 		if (todoInput.disabled || !todoInput.value.length) {
 			return;
 		}
-		addTask(todoInput.value);
+		addTask(todoInput.value, getNowDate());
 		todoInput.value = '';
 	} else if (target.parentNode.tagName == 'LI') {
 		let setTargetID = target.parentNode.dataset.todoKey;
@@ -96,6 +94,21 @@ const action = (e) => {
 			completeTask(parseInt(setTargetID));
 		}
 	}
+};
+
+const getNowDate = () => {
+	let date = new Date();
+	const nowDate =
+		String(date.getHours()).padStart(2, '0') +
+		':' +
+		String(date.getMinutes()).padStart(2, '0') +
+		' ' +
+		String(date.getDate()).padStart(2, '0') +
+		'/' +
+		String(date.getMonth() + 1).padStart(2, '0') +
+		'/' +
+		date.getFullYear();
+	return nowDate;
 };
 
 const renderAndSave = (tasks) => {
