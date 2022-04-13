@@ -5,10 +5,13 @@ const todoInput = document.querySelector('.todo__input');
 let tasks = [];
 
 const addTask = (text) => {
+	let date = new Date();
+	
 	const task = {
 		text,
 		id: Date.now(),
 		completed: false,
+		date: date.toISOString().split('T')[0],
 	};
 
 	tasks.push(task);
@@ -19,15 +22,12 @@ const addTask = (text) => {
 };
 
 const deleteTask = (id) => {
-	tasks = tasks.filter((task) => task.id != id);
+	tasks = tasks.filter((task) => task.id !== id);
 
 	renderAndSave(tasks);
 };
 
 const completeTask = (id) => {
-	/* console.log(typeof id);
-	console.log(typeof tasks[0].id); */
-
 	tasks.map((task) => {
 		if (task.id === id) {
 			if (task.completed) {
@@ -60,6 +60,7 @@ const renderTasks = (tasks) => {
 					task.completed ? 'completed' : ''
 				}" data-todo-state="action" data-todo-key="${task.id}">
 						<span class="todo__task">${task.text}</span>
+						<span class='todo__date'>${task.date}</span>
 						<span class="todo__action todo__action_delete" data-todo-action="deleted"></span>
 						<span class="todo__action todo__action_complete" data-todo-action="completed"></span>
 				</li>`;
@@ -90,9 +91,9 @@ const action = (e) => {
 	} else if (target.parentNode.tagName == 'LI') {
 		let setTargetID = target.parentNode.dataset.todoKey;
 		if (target.dataset.todoAction == 'deleted') {
-			deleteTask(setTargetID);
+			deleteTask(parseInt(setTargetID));
 		} else if (target.dataset.todoAction == 'completed') {
-			completeTask(Number(setTargetID));
+			completeTask(parseInt(setTargetID));
 		}
 	}
 };
