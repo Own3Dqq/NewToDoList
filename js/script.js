@@ -1,6 +1,5 @@
 /* ------------------------------------------ */
 const todoList = document.querySelector('.todo__list');
-const todoBtn = document.querySelector('.todo__btn');
 const todoInput = document.querySelector('.todo__input');
 let tasks = [];
 
@@ -9,13 +8,10 @@ const addTask = (text, date) => {
 		text,
 		id: Date.now(),
 		completed: false,
-		date,
+		date
 	};
-
 	tasks.push(task);
-
 	renderAndSave(tasks);
-
 	todoInput.innerHTML = '';
 };
 
@@ -29,9 +25,9 @@ const completeTask = (id) => {
 	tasks.map((task) => {
 		if (task.id === id) {
 			if (task.completed) {
-				return (task.completed = false);
+				return (task.completed = !task.completed);
 			} else {
-				return (task.completed = true);
+				return (task.completed = !task.completed);
 			}
 		}
 
@@ -53,10 +49,9 @@ const renderTasks = (tasks) => {
 		let tasksToHTML = '';
 
 		tasks.forEach((task) => {
+			const classCompleted = task.completed ? 'completed' : '';
 			tasksToHTML += `
-				<li class="todo__item ${
-					task.completed ? 'completed' : ''
-				}" data-todo-state="action" data-todo-key="${task.id}">
+				<li class="todo__item ${classCompleted}" data-todo-state="action" data-todo-key="${task.id}">
 						<span class="todo__task">${task.text}</span>
 						<span class='todo__date'>${task.date}</span>
 						<span class="todo__action todo__action_delete" data-todo-action="deleted"></span>
@@ -86,8 +81,8 @@ const action = (e) => {
 		}
 		addTask(todoInput.value, getNowDate());
 		todoInput.value = '';
-	} else if (target.parentNode.tagName == 'LI') {
-		let setTargetID = target.parentNode.dataset.todoKey;
+	} else if (target.parentNode.tagName === 'LI') {
+		const setTargetID = target.parentNode.dataset.todoKey;
 		if (target.dataset.todoAction == 'deleted') {
 			deleteTask(parseInt(setTargetID));
 		} else if (target.dataset.todoAction == 'completed') {
@@ -97,18 +92,17 @@ const action = (e) => {
 };
 
 const getNowDate = () => {
-	let date = new Date();
-	const nowDate =
-		String(date.getHours()).padStart(2, '0') +
-		':' +
-		String(date.getMinutes()).padStart(2, '0') +
-		' ' +
-		String(date.getDate()).padStart(2, '0') +
-		'/' +
-		String(date.getMonth() + 1).padStart(2, '0') +
-		'/' +
-		date.getFullYear();
-	return nowDate;
+	const options = {
+		year: 'numeric',
+		month: 'long',
+		day: '2-digit',
+		hour: '2-digit',
+		minute: '2-digit',
+		second: '2-digit',
+	};
+	return new Intl.DateTimeFormat(navigator.language, options).format(
+		new Date()
+	);
 };
 
 const renderAndSave = (tasks) => {
