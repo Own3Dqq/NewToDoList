@@ -15,12 +15,10 @@ body {
 	-webkit-box-sizing: border-box;
 	box-sizing: border-box;
 	background: rgb(131, 58, 180);
-	background: linear-gradient(
-		90deg,
-		rgba(131, 58, 180, 1) 0%,
-		rgba(253, 29, 29, 1) 50%,
-		rgba(252, 176, 69, 1) 100%
-	);
+	background: linear-gradient(90deg,
+			rgba(131, 58, 180, 1) 0%,
+			rgba(253, 29, 29, 1) 50%,
+			rgba(252, 176, 69, 1) 100%);
 }
 
 .container {
@@ -33,7 +31,14 @@ body {
 	font-weight: 700;
 }
 
-.todo__wrap {
+.todo__counter {
+	display: flex;
+	justify-content: space-between;
+	font-size: 20px;
+	padding: 0 2px;
+}
+
+.todo__form {
 	display: flex;
 	justify-content: space-between;
 	flex-wrap: wrap;
@@ -41,7 +46,7 @@ body {
 	margin-bottom: 25px;
 }
 
-.todo__input {
+.form__input {
 	padding: 10px 15px;
 	width: 330px;
 	font-size: 20px;
@@ -49,19 +54,20 @@ body {
 	border-radius: 2px;
 	background: #fff;
 }
-.todo__input:focus-visible {
+
+.form__input:focus-visible {
 	outline: 2px solid #9e9e9e;
 }
 
-.todo__input::placeholder {
+.form__input::placeholder {
 	color: #707070;
 }
 
-.todo__input:focus::-webkit-input-placeholder {
+.form__input:focus::-webkit-input-placeholder {
 	color: transparent;
 }
 
-.todo__btn {
+.form__btn {
 	max-width: 120px;
 	position: relative;
 	padding: 10px 15px;
@@ -74,12 +80,13 @@ body {
 	opacity: 0.8;
 	cursor: pointer;
 }
-.todo__btn:hover {
+
+.form__btn:hover {
 	opacity: 1;
 	transition: all 0.3s ease-out;
 }
 
-.todo__btn:active {
+.form__btn:active {
 	opacity: 0.7;
 	transition: none;
 }
@@ -89,7 +96,7 @@ body {
 	padding: 0;
 }
 
-.todo__item {
+.list__item {
 	position: relative;
 	list-style: none;
 	padding: 15px;
@@ -100,7 +107,7 @@ body {
 	font-weight: normal;
 }
 
-.todo__items {
+.list__item {
 	width: 100%;
 	list-style-type: none;
 	padding-left: 0;
@@ -108,18 +115,18 @@ body {
 	margin-right: auto;
 }
 
-.todo__item {
+.list__item {
 	background-color: #fafafa;
 	padding: 10px 15px;
 	position: relative;
 	overflow: hidden;
 }
 
-.todo__item:not(:last-child) {
+.list__item:not(:last-child) {
 	margin-bottom: 0.5rem;
 }
 
-.todo__action {
+.item__action {
 	position: absolute;
 	top: -20px;
 	right: 15px;
@@ -133,7 +140,7 @@ body {
 	cursor: pointer;
 }
 
-.todo__action::before {
+.item__action::before {
 	content: '';
 	position: absolute;
 	top: 6px;
@@ -145,32 +152,28 @@ body {
 	background-position: center;
 }
 
-.todo__action_delete {
+.item__action_delete {
 	right: 52px;
 	background-color: #e57373;
 }
 
-.todo__action_complete {
+.item__action_complete {
 	background-color: #66bb6a;
 }
 
-.todo__action_restore::before {
-	background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'%3E%3Cpath fill='%23fff' d='M212.333 224.333H12c-6.627 0-12-5.373-12-12V12C0 5.373 5.373 0 12 0h48c6.627 0 12 5.373 12 12v78.112C117.773 39.279 184.26 7.47 258.175 8.007c136.906.994 246.448 111.623 246.157 248.532C504.041 393.258 393.12 504 256.333 504c-64.089 0-122.496-24.313-166.51-64.215-5.099-4.622-5.334-12.554-.467-17.42l33.967-33.967c4.474-4.474 11.662-4.717 16.401-.525C170.76 415.336 211.58 432 256.333 432c97.268 0 176-78.716 176-176 0-97.267-78.716-176-176-176-58.496 0-110.28 28.476-142.274 72.333h98.274c6.627 0 12 5.373 12 12v48c0 6.627-5.373 12-12 12z'%3E%3C/path%3E%3C/svg%3E");
-}
-
-.todo__action_complete::before {
+.item__action_complete::before {
 	background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'%3E%3Cpath fill='%23fff' d='M173.898 439.404l-166.4-166.4c-9.997-9.997-9.997-26.206 0-36.204l36.203-36.204c9.997-9.998 26.207-9.998 36.204 0L192 312.69 432.095 72.596c9.997-9.997 26.207-9.997 36.204 0l36.203 36.204c9.997 9.997 9.997 26.206 0 36.204l-294.4 294.401c-9.998 9.997-26.207 9.997-36.204-.001z'%3E%3C/path%3E%3C/svg%3E");
 }
 
-.todo__action_delete::before {
+.item__action_delete::before {
 	background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 448 512'%3E%3Cpath fill='%23fff' d='M32 464a48 48 0 0 0 48 48h288a48 48 0 0 0 48-48V128H32zm272-256a16 16 0 0 1 32 0v224a16 16 0 0 1-32 0zm-96 0a16 16 0 0 1 32 0v224a16 16 0 0 1-32 0zm-96 0a16 16 0 0 1 32 0v224a16 16 0 0 1-32 0zM432 32H312l-9.4-18.7A24 24 0 0 0 281.1 0H166.8a23.72 23.72 0 0 0-21.4 13.3L136 32H16A16 16 0 0 0 0 48v32a16 16 0 0 0 16 16h416a16 16 0 0 0 16-16V48a16 16 0 0 0-16-16z'%3E%3C/path%3E%3C/svg%3E");
 }
 
-.todo__item:hover .todo__action {
+.list__item:hover .item__action {
 	top: 50%;
 }
 
-.todo__item:hover .todo__action:hover {
+.list__item:hover .list__action:hover {
 	opacity: 1;
 }
 
@@ -199,19 +202,12 @@ body {
 	display: none;
 }
 
-.completed {
+.list__item_completed {
 	text-decoration: line-through;
 	opacity: 0.7;
 }
 
-.todo__counter {
-	display: flex;
-	justify-content: space-between;
-	font-size: 20px;
-	padding: 0 2px;
-}
-
-.todo__general {
+.item__general {
 	height: 40px;
 }
 
@@ -219,7 +215,7 @@ body {
 	font-size: 18px
 }
 
-.todo__date {
+.item__date {
 	font-size: 12px;
 	color: #707070
 }
