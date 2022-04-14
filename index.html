@@ -1,37 +1,38 @@
 <!DOCTYPE html>
 <html lang="en">
-	<head>
-		<meta charset="UTF-8" />
-		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
-		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-		<link rel="stylesheet" href="css/stylesheet.css" />
-		<title>Project To Do List</title>
-	</head>
-	<body>
-		<main>
-			<div class="container">
-				<div class="todo">
-					<h1 class="todo__title">To Do List</h1>
-					<div class="todo__counter">
-						<div class="todo__general">
-							<span>Task in work: </span>
-							<span class="todo__count" data-general-counter>0</span>
-						</div>
-						<div class="todo__complete">
-							<span style="display: none">Complete: </span>
-							<span  style="display: none" data-complete-counter>0</span>
-						</div>
-					</div>
-					<div class="todo__wrap">
-						<input class="todo__input" placeholder="New task...." type="text" />
-						<button class="todo__btn">Add task</button>
-					</div>
-					<ul class="todo__list">
-						<!-- <span class="message">You have 0 task, add a new</span> -->
-					</ul>
+
+<head>
+	<meta charset="UTF-8" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<link rel="stylesheet" href="css/stylesheet.css" />
+	<title>Project To Do List</title>
+</head>
+
+<body>
+	<main class="todo">
+		<div class="container">
+			<h1 class="todo__title">To Do List</h1>
+			<div class="todo__counter">
+				<div class="counter counter_general">
+					<span class="counter__title">Task in work: </span>
+					<span class="counter__value" data-gerenal-counter>0</span>
 				</div>
+				<div class="counter counter_complete">
+					<span class="counter__title">Complete task: </span>
+					<span class="counter__value" data-complete-counter>0</span>
+				</div>
+
 			</div>
-		</main>
-		<script src="js/script.js"></script>
-	</body>
+			<div class="todo__form form">
+				<input type="text" class="form__input" placeholder="New task...">
+				<button class="form__btn">Add task</button>
+			</div>
+			<ul class="todo__list list"></ul>
+		</div>
+	</main>
+
+	<script src="js/script.js"></script>
+</body>
+
 </html>
