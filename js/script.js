@@ -124,6 +124,7 @@ const init = () => {
 
 	renderTasks(tasks);
 	updateCounter(tasks.length);
+	counterCompleted(tasks);
 };
 
 document.addEventListener('keydown', action);
