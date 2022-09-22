@@ -1,38 +1,85 @@
 <!DOCTYPE html>
 <html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Project To Do List</title>
+		<link rel="stylesheet" href="css/stylesheet.css" />
+		<!-- <link rel="stylesheet" href="css/form.css"> -->
+	</head>
 
-<head>
-	<meta charset="UTF-8" />
-	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
-	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-	<link rel="stylesheet" href="css/stylesheet.css" />
-	<title>Project To Do List</title>
-</head>
-
-<body>
-	<main class="todo">
-		<div class="container">
-			<h1 class="todo__title">To Do List</h1>
-			<div class="todo__counter">
-				<div class="counter counter_general">
-					<span class="counter__title">Task in work: </span>
-					<span class="counter__value" data-gerenal-counter>0</span>
+	<body>
+		<main class="todo">
+			<div class="container">
+				<h1 class="todo__title">To Do List</h1>
+				<!-- Form Start -->
+				<div class="popup__bg">
+					<form class="popup" method="POST" action="#">
+						<div class="popup--close">X</div>
+						<div class="popup--content">
+							<h3 class="popup--title">Registration</h3>
+							<div class="input-box">
+								<!-- <span class="details">Username</span> -->
+								<!-- <input type="text" placeholder="Enter your username" name="username" required /> -->
+							</div>
+							<div class="input-box">
+								<!-- <span class="details">Email</span> -->
+								<input type="email" placeholder="Enter your email" name="email" required />
+							</div>
+							<div class="input-box">
+								<!-- <span class="details">Password</span> -->
+								<input type="password" placeholder="Enter your password" name="password" required />
+							</div>
+							<div class="input-box">
+								<!-- <span class="details">Confirm Password</span> -->
+								<!-- <input type="password" placeholder="Confirm your password" required /> -->
+							</div>
+							<!-- <div class="button popup--btn button button--invite btn-agree"></div> -->
+							<button class="popup--btn button button--invite btn-agree" type="submit">Отправить</button>
+						</div>
+					</form>
 				</div>
-				<div class="counter counter_complete">
-					<span class="counter__title">Complete task: </span>
-					<span class="counter__value" data-complete-counter>0</span>
+
+				<div class="login">
+					<button class="login__registation button--invite">Registration</button>
+					<!-- <button class="login__in button--invite">Sign in</button> -->
 				</div>
 
+				<div class="todo__counter">
+					<div class="counter counter_general">
+						<span class="counter__title">Task in work: </span>
+						<span class="counter__value" data-gerenal-counter>0</span>
+					</div>
+					<div class="counter counter_complete">
+						<span class="counter__title">Complete task: </span>
+						<span class="counter__value" data-complete-counter>0</span>
+					</div>
+				</div>
+				<div class="todo__form form">
+					<input type="text" class="form__input" placeholder="New task..." />
+					<button class="form__btn">Add task</button>
+				</div>
+				<ul class="todo__list list"></ul>
 			</div>
-			<div class="todo__form form">
-				<input type="text" class="form__input" placeholder="New task...">
-				<button class="form__btn">Add task</button>
+		</main>
+
+		<!-- <div class="inner">
+			<form class="form__data" action="#">
+				<input class="form__action" type="text" name="username" placeholder="Username" />
+				<input class="form__action" type="email" name="email" placeholder="Email" id="" />
+				<input class="form__action" type="password" name="password" placeholder="password" />
+				<button class="form__button" type="submit">Submit</button>
+			</form>
+		</div> -->
+		<!--  -->
+		<!-- <div class="prev-login">
+			<div class="login__form">
+				<input class="form__action" type="text" name="username" placeholder="Username" />
+				<input class="form__action" type="password" name="password" placeholder="Password" />
 			</div>
-			<ul class="todo__list list"></ul>
-		</div>
-	</main>
+		</div> -->
 
-	<script src="js/script.js"></script>
-</body>
-
+		<script src="js/script.js"></script>
+	</body>
 </html>
