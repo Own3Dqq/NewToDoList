@@ -2,7 +2,7 @@
 const todoList = document.querySelector('.todo__list');
 const todoInput = document.querySelector('.form__input');
 const todoForm = document.querySelector('.todo__form');
-let taskDeleteBtns, taskEditBtns, taskCompleteBtns;
+// let taskDeleteBtns, taskEditBtns, taskCompleteBtns;
 /* ------------------------------------------- */
 
 const renderTasks = (tasks) => {
@@ -15,13 +15,18 @@ const renderTasks = (tasks) => {
 
 		tasks.forEach((task) => {
 			const classCompleted = task.completed ? 'list__item_completed' : '';
+
 			tasksToHTML += `
  				<li class="list__item item ${classCompleted}" data-todo-state="action" data-todo-key="${task.id}">
- 						<span class="item__text">${task.text}</span>
+						<label class='item__label'>${task.text}</label>
+						<input class='editInput' value='${task.text}'>
  						<span class='item__date'>${task.date}</span>
- 						<span class="item__action item__action_delete" data-todo-action="deleted"></span>
-						 <span class="item__action item__action_edit" data-todo-action="edit"></span>
- 						<span class="item__action item__action_complete" data-todo-action="completed"></span>
+						<div class='item__action'>
+							<button class='item_action_btn item-action__delete' data-todo-action="deleted"></button>
+							<button class='item_action_btn item-action__edit' data-todo-action="edit"></button>
+							<button class='item_action_btn item-action__complete' data-todo-action="completed"></button>
+						</div>
+ 						
  				</li>`;
 		});
 		todoList.insertAdjacentHTML('afterbegin', tasksToHTML);
@@ -46,6 +51,7 @@ const updateAllTasksCounter = (arg) => {
 
 const renderTask = (e) => {
 	e.preventDefault();
+
 	if (!todoInput.value.length) {
 		return;
 	}
@@ -62,15 +68,17 @@ const renderAndSave = (tasks) => {
 	updateCompletedTasksCounter(tasks);
 };
 
-const initTaskActions = (e) => {
-	taskDeleteBtns = document.querySelectorAll('.item__action_delete');
-	taskEditBtns = document.querySelectorAll('.item__action_edit');
-	taskCompleteBtns = document.querySelectorAll('.item__action_complete');
+const initTaskActions = () => {
+	taskDeleteBtns = document.querySelectorAll('.item-action__delete');
+	taskEditBtns = document.querySelectorAll('.item-action__edit');
+	taskCompleteBtns = document.querySelectorAll('.item-action__complete');
 
 	taskDeleteBtns.forEach((btn) => {
 		btn.addEventListener('click', (e) => {
-			const target = e.target;
+			e.preventDefault();
+			const target = e.target.parentNode;
 			const targetId = target.parentNode.dataset.todoKey;
+			console.log(targetId);
 			deleteTask(parseInt(targetId));
 			initTaskActions();
 		});
@@ -78,16 +86,16 @@ const initTaskActions = (e) => {
 
 	taskEditBtns.forEach((btn) => {
 		btn.addEventListener('click', (e) => {
-			const target = e.target;
-			const targetId = target.parentNode.dataset.todoKey;
-			editTask(parseInt(targetId));
+			e.preventDefault();
+			const target = e.target.parentNode;
+			editTask(target.parentNode);
 			initTaskActions();
 		});
 	});
 
 	taskCompleteBtns.forEach((btn) => {
 		btn.addEventListener('click', (e) => {
-			const target = e.target;
+			const target = e.target.parentNode;
 			const targetId = target.parentNode.dataset.todoKey;
 			completeTask(parseInt(targetId));
 			initTaskActions();

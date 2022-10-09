@@ -50,7 +50,8 @@ const formReg = `
 			<button class="popup__btn" type="submit">Отправить</button>
 `;
 
-const auth = (e) => {
+
+const showModalWindow = (e) => {
 	content.insertAdjacentHTML('beforeend', e.target.classList.contains('btn__log') ? formAuth : formReg);
 	popup.classList.add('active');
 };
@@ -61,5 +62,6 @@ const closeAuth = () => {
 	content.innerHTML = '';
 };
 
-authorization.addEventListener('click', (e) => auth(e));
+
+authorization.addEventListener('click', (e) => showModalWindow(e));
 btnClose.addEventListener('click', closeAuth);

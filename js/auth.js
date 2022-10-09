@@ -77,23 +77,23 @@
 // 		.catch(() => console.log('Error'));
 // }
 
-const formData = {
-	name: 'morpheus',
-	job: 'leader',
-};
+// const formData = {
+// 	name: 'morpheus',
+// 	job: 'leader',
+// };
 
-const retrieveFormValue = (data) => {
-	fetch('https://reqres.in/api/users', {
-		method: 'POST',
-		body: data,
-	})
-		.then((responce) => responce.json())
-		.then((json) => {
-			console.log(json);
-		})
-		.catch(() => {
-			console.error(responce);
-		});
-};
+// const retrieveFormValue = (data) => {
+// 	fetch('https://reqres.in/api/users', {
+// 		method: 'POST',
+// 		body: data,
+// 	})
+// 		.then((responce) => responce.json())
+// 		.then((json) => {
+// 			console.log(json);
+// 		})
+// 		.catch(() => {
+// 			console.error(responce);
+// 		});
+// };
 
-form.addEventListener('submit', retrieveFormValue(formData));
+// form.addEventListener('submit', retrieveFormValue(formData));
