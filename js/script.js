@@ -2,7 +2,7 @@
 const todoList = document.querySelector('.todo__list');
 const todoInput = document.querySelector('.form__input');
 const todoForm = document.querySelector('.todo__form');
-// let taskDeleteBtns, taskEditBtns, taskCompleteBtns;
+let taskDeleteBtns, taskEditBtns, taskCompleteBtns;
 /* ------------------------------------------- */
 
 const renderTasks = (tasks) => {
@@ -78,7 +78,6 @@ const initTaskActions = () => {
 			e.preventDefault();
 			const target = e.target.parentNode;
 			const targetId = target.parentNode.dataset.todoKey;
-			console.log(targetId);
 			deleteTask(parseInt(targetId));
 			initTaskActions();
 		});
