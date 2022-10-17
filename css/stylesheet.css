@@ -242,6 +242,10 @@ body {
 	color: #707070
 }
 
+.editMode {
+	pointer-events: all;
+}
+
 
 /* Media */
 @media screen and (max-width: 575px) {

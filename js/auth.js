@@ -1,26 +1,45 @@
-const formData = {
-	email: 'eve.holt@reqres.in',
-	// password: 'pistol',
+function serializeForm(formNode) {
+	return new FormData(formNode);
+}
+
+const obj = {
+	reg: 'https://reqres.in/api/register',
+	login: 'https://reqres.in/api/login',
 };
 
-const retrieveFormValue = (e, data) => {
-	e.preventDefault();
-
-	fetch('https://reqres.in/api/register', {
-		headers: {
-			'Content-Type': 'application/json',
-		},
+async function sendData(e, data) {
+	return await fetch(e.dataset.url === 'login' ? obj.login : obj.reg, {
 		method: 'POST',
-		body: JSON.stringify(data),
-	})
-		.then((responce) => {
-			if (responce !== 200) {
-				console.log('error');
-			}
+		headers: { 'Content-Type': 'multipart/form-data' },
+		body: data,
+	});
+}
 
-			return responce.json();
-		})
-		.then((json) => console.log('ss', json));
-};
+function toggleLoader() {
+	const loader = document.querySelector('.lds-dual-ring');
+	loader.classList.toggle('preloader-active');
+}
 
-form.addEventListener('submit', (e) => retrieveFormValue(e, formData));
+function onSuccess(formNode) {
+	alert('Ваша заявка отправлена!');
+	formNode.classList.toggle('hidden');
+}
+
+function onError(error) {
+	alert(error);
+}
+
+// Вызовем её вот так:
+async function handleFormSubmit(event) {
+	event.preventDefault();
+
+	const data = serializeForm(event.target);
+
+	toggleLoader();
+
+	const { status, error } = await sendData(event.target, data);
+
+	status === 200 ? onSuccess() : onError(error);
+
+	toggleLoader();
+}

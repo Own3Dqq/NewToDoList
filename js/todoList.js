@@ -30,25 +30,48 @@ const completeTask = (id) => {
 };
 
 const editTask = (elem) => {
+	initTaskActions();
 	let editInput = elem.querySelector('.editInput');
 	let label = elem.querySelector('.item__label');
 
-	if (elem.classList.contains('editMode')) {
-		editInput.style.display = 'none';
-		label.style.display = 'block';
-		tasks.map((task) => {
-			if (task.id == elem.dataset.todoKey) {
-				task.text = editInput.value;
-				console.log('1');
-			}
-		});
-
-		renderAndSave(tasks);
-	} else {
+	if (!elem.classList.contains('editMode')) {
 		label.style.display = 'none';
 		editInput.style.display = 'block';
+		editInput.focus();
+
+		taskDeleteBtns.forEach((btn) => {
+			btn.disabled = true;
+		});
+		taskCompleteBtns.forEach((btn) => {
+			btn.disabled = true;
+		});
+		taskEditBtns.forEach((btn) => {
+			btn.disabled = true;
+		});
 	}
 
-	//toggle .editmode on the parent.
+	const inputChange = document.querySelectorAll('.editInput');
+
+	inputChange.forEach((btn) => {
+		btn.addEventListener('keydown', (e) => {
+			if (e.keyCode === 13) {
+				editInput.style.display = 'none';
+				label.style.display = 'block';
+				tasks.map((task) => {
+					if (task.id == elem.dataset.todoKey) {
+						task.text = editInput.value;
+					}
+				});
+				renderAndSave(tasks);
+				initTaskActions();
+			} else if (e.keyCode === 27) {
+				editInput.style.display = 'none';
+				label.style.display = 'block';
+				renderAndSave(tasks);
+				initTaskActions();
+			}
+		});
+	});
+
 	elem.classList.toggle('editMode');
 };

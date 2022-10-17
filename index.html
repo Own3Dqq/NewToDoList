@@ -5,6 +5,7 @@
 		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 		<title>Project To Do List</title>
+		<link rel="stylesheet" href="css/preloader.css" />
 		<link rel="stylesheet" href="css/modal.css" />
 		<link rel="stylesheet" href="css/stylesheet.css" />
 	</head>
@@ -16,16 +17,39 @@
 		</div>
 		<!-- Button Log In & Register -->
 		<!-- Modal -->
-		<div class="popup">
-			<form class="popup__form" id="form" method="POST" action="#">
-				<div class="popup__close">
-					<span class="popop__btn-close">X</span>
-				</div>
-				<div class="popup__content"></div>
-			</form>
+		<div class="modal" data-modal="1">
+			<!--   Svg иконка для закрытия окна  -->
+			<svg class="modal__close js-modal-close" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+				<path
+					d="M23.954 21.03l-9.184-9.095 9.092-9.174-2.832-2.807-9.09 9.179-9.176-9.088-2.81 2.81 9.186 9.105-9.095 9.184 2.81 2.81 9.112-9.192 9.18 9.1z"
+				/>
+			</svg>
+			<div class="modal__content">
+				<!-- <form class="modal__form" action="">
+					<h3 class="modal__title">Log In</h3>
+					<div class="modal__list">
+						<div class="modal__item">
+							<input class="modal__input" type="text" placeholder="Enter your login" name="login" required />
+						</div>
+						<div class="modal__item">
+							<input class="modal__input" type="email" placeholder="Enter your email" name="email" required />
+						</div>
+						<div class="modal__item">
+							<input class="modal__input" type="password" placeholder="Enter your password" name="password" required />
+						</div>
+					</div>
+					<div class="modal__item">
+						<input class="modal__checkbox" type="checkbox" name="remember" />
+						<span class="modal__text">Запомнить меня</span>
+					</div>
+					<button class="modal__btn" type="submit">Отправить</button>
+				</form> -->
+			</div>
+			<div class="lds-dual-ring"></div>
 		</div>
+		<div class="overlay" id="overlay-modal"></div>
 		<!-- Modal End -->
-		<!-- Todo --> 
+		<!-- Todo -->
 		<main class="todo">
 			<div class="container">
 				<h1 class="todo__title">ToDo List</h1>
@@ -47,11 +71,6 @@
 			</div>
 		</main>
 
-		<!--  -->
-		<div>
-
-		</div>
-		<!--  -->
 		<!-- Todo End -->
 		<script src="js/helpers.js"></script>
 		<script src="js/auth.js"></script>

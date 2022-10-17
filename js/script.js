@@ -78,6 +78,7 @@ const initTaskActions = () => {
 			e.preventDefault();
 			const target = e.target.parentNode;
 			const targetId = target.parentNode.dataset.todoKey;
+
 			deleteTask(parseInt(targetId));
 			initTaskActions();
 		});
@@ -88,7 +89,7 @@ const initTaskActions = () => {
 			e.preventDefault();
 			const target = e.target.parentNode;
 			editTask(target.parentNode);
-			initTaskActions();
+			
 		});
 	});
 
@@ -110,6 +111,7 @@ const init = () => {
 	}
 
 	renderTasks(tasks);
+	initTaskActions();
 	updateAllTasksCounter(tasks.length);
 	updateCompletedTasksCounter(tasks);
 };
