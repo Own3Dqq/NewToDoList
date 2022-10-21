@@ -6,7 +6,7 @@ const modalOverlay = document.querySelector('.overlay');
 const btnClosePopupWindow = document.querySelector('.modal__close');
 
 const formAuth = `
-		<form class="modal__form"  data-url=login action="">
+		<form class="modal__form" data-url='login' method="POST">
 			<h3 class="modal__title">Log In</h3>
 			<div class="modal__list">
 				<div class="modal__item">
@@ -25,7 +25,7 @@ const formAuth = `
 `;
 
 const formReg = `
-		<form class="modal__form" data-url=reg method="POST" action="">
+		<form class="modal__form" data-url='register'  method="POST">
 			<h3 class="modal__title">Registation</h3>
 			<div class="modal__list">
 				<div class="modal__item">
@@ -55,7 +55,22 @@ const showModalWindow = (e) => {
 
 	modalContent.insertAdjacentHTML('beforeend', e.target.classList.contains('btn__log') ? formAuth : formReg);
 	const sendRequest = document.querySelector('.modal__form');
-	sendRequest.addEventListener('submit', (e) => handleFormSubmit(e));
+	const emailInput = document.querySelector('input[name=email]');
+	const passwordInput = document.querySelector('input[name=password]');
+
+	console.log();
+
+	sendRequest.addEventListener('submit', (e) => {
+		e.preventDefault();
+		const body = {
+			email: emailInput.value,
+			password: passwordInput.value,
+		};
+
+		const method = e.target.getAttribute('data-url');
+
+		handleFormSubmit(body, method);
+	});
 };
 
 const closeModalWindow = () => {
