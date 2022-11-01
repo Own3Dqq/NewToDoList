@@ -2,6 +2,7 @@
 const todoList = document.querySelector('.todo__list');
 const todoInput = document.querySelector('.form__input');
 const todoForm = document.querySelector('.todo__form');
+const authBtns = document.querySelector('.authorization');
 let taskDeleteBtns, taskEditBtns, taskCompleteBtns;
 /* ------------------------------------------- */
 
@@ -89,7 +90,6 @@ const initTaskActions = () => {
 			e.preventDefault();
 			const target = e.target.parentNode;
 			editTask(target.parentNode);
-			
 		});
 	});
 
@@ -103,7 +103,46 @@ const initTaskActions = () => {
 	});
 };
 
+const checkedAuthKey = () => {
+	if (localStorage.hasOwnProperty('auth')) {
+		authBtns.innerHTML = '';
+		const authLogOut = `
+			<div class="authorization__account account">
+					<span class="account__img"><i class="fa-solid fa-user"></i></span>
+					<span class="account__user">Own3Dqq@gmail.com</span>
+					<menu class="account__menu">
+						<ul class="account-menu__list">
+							<li class="account-menu__item">
+								<a class="account-menu__link" href="#">Profile</a>
+							</li>
+							<li class="account-menu__item">
+								<a class="account-menu__link" href="#">Setting</a>
+							</li>
+						</ul>
+					</menu>
+			</div>
+			<button class="btn__out"><i class="fa-sharp fa-solid fa-right-from-bracket"></i> Log Out</button>
+		`;
+
+		authBtns.insertAdjacentHTML('afterbegin', authLogOut);
+
+		const logOutBtn = document.querySelector('.btn__out');
+		const accountMenu = document.querySelector('.account__menu');
+
+		accountMenu.addEventListener('click', () => {
+			const dropDownMenu = document.querySelector('.account-menu__list');
+			dropDownMenu.classList.toggle('active-menu');
+		});
+
+		logOutBtn.addEventListener('click', () => {
+			localStorage.removeItem('auth');
+			location.reload();
+		});
+	}
+};
+
 const init = () => {
+	checkedAuthKey();
 	let getStorage = JSON.parse(localStorage.getItem('todo'));
 
 	if (getStorage) {

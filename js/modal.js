@@ -47,7 +47,7 @@ const formReg = `
 `;
 
 const showModalWindow = (e) => {
-	e.preventDefault();
+	// e.preventDefault();
 	const modalContent = document.querySelector('.modal__content');
 	modalContent.innerHTML = '';
 	popupWindow.classList.add('active');
@@ -57,8 +57,6 @@ const showModalWindow = (e) => {
 	const sendRequest = document.querySelector('.modal__form');
 	const emailInput = document.querySelector('input[name=email]');
 	const passwordInput = document.querySelector('input[name=password]');
-
-	console.log();
 
 	sendRequest.addEventListener('submit', (e) => {
 		e.preventDefault();
@@ -70,6 +68,8 @@ const showModalWindow = (e) => {
 		const method = e.target.getAttribute('data-url');
 
 		handleFormSubmit(body, method);
+		closeModalWindow();
+		checkedAuthKey();
 	});
 };
 

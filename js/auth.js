@@ -5,8 +5,6 @@ function toggleLoader() {
 
 // Вызовем её вот так:
 async function handleFormSubmit(body, method) {
-	console.log('body', body);
-
 	fetch(`https://reqres.in/api/${method}`, {
 		method: 'POST',
 		headers: {
@@ -20,5 +18,5 @@ async function handleFormSubmit(body, method) {
 			}
 			return responce.json();
 		})
-		.then((json) => console.log('ss', json));
+		.then((json) => localStorage.setItem('auth', JSON.stringify(json)));
 }
