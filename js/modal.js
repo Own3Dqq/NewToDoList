@@ -47,7 +47,7 @@ const formReg = `
 `;
 
 const showModalWindow = (e) => {
-	// e.preventDefault();
+	e.preventDefault();
 	const modalContent = document.querySelector('.modal__content');
 	modalContent.innerHTML = '';
 	popupWindow.classList.add('active');
@@ -68,8 +68,8 @@ const showModalWindow = (e) => {
 		const method = e.target.getAttribute('data-url');
 
 		handleFormSubmit(body, method);
-		closeModalWindow();
 		checkedAuthKey();
+		closeModalWindow();
 	});
 };
 

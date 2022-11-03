@@ -2,7 +2,7 @@
 const todoList = document.querySelector('.todo__list');
 const todoInput = document.querySelector('.form__input');
 const todoForm = document.querySelector('.todo__form');
-const authBtns = document.querySelector('.authorization');
+const authContent = document.querySelector('.authorization');
 let taskDeleteBtns, taskEditBtns, taskCompleteBtns;
 /* ------------------------------------------- */
 
@@ -104,8 +104,8 @@ const initTaskActions = () => {
 };
 
 const checkedAuthKey = () => {
-	if (localStorage.hasOwnProperty('auth')) {
-		authBtns.innerHTML = '';
+	if (localStorage.hasOwnProperty('auth') === true) {
+		authContent.innerHTML = ' ';
 		const authLogOut = `
 			<div class="authorization__account account">
 					<span class="account__img"><i class="fa-solid fa-user"></i></span>
@@ -124,7 +124,7 @@ const checkedAuthKey = () => {
 			<button class="btn__out"><i class="fa-sharp fa-solid fa-right-from-bracket"></i> Log Out</button>
 		`;
 
-		authBtns.insertAdjacentHTML('afterbegin', authLogOut);
+		authContent.insertAdjacentHTML('afterbegin', authLogOut);
 
 		const logOutBtn = document.querySelector('.btn__out');
 		const accountMenu = document.querySelector('.account__menu');
@@ -142,7 +142,7 @@ const checkedAuthKey = () => {
 };
 
 const init = () => {
-	checkedAuthKey();
+	// checkedAuthKey();
 	let getStorage = JSON.parse(localStorage.getItem('todo'));
 
 	if (getStorage) {
